@@ -1,0 +1,19 @@
+name: Docker Python Build And Docker Push
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  build-push:
+    runs-on:
+      labels: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker Build And Push to Aliyun
+        run: |
+          docker login --username=${{ secrets.ALIYUN_DOCKER_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.ALIYUN_DOCKER_PASSWORD }}
+          docker build -t ${{ vars.IMAGE_NAME }}:python-${{ github.run_number }} .
+          docker push ${{ vars.IMAGE_NAME }}:python-${{ github.run_number }}

@@ -1,0 +1,4 @@
+paddleocr==2.6.0.1
+uvicorn>=0.22.0
+fastapi~=0.100.0
+numpy==1.23.5
